@@ -1,18 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Clone Project</title>
-    <link rel="stylesheet" href="git.css">
+    <link rel="stylesheet" href="clone-project.css" />
     <script src="jquery-3.7.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.3/socket.io.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.3/socket.io.js"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="git.js"></script>
-</head>
-<body>
-    <h1>JavaScript Progress Bar</h1>
-    <progress id="GitProgress" value="0" max="100"> 0% </progress>
-    <button onclick="clone()">Click to clone</button>
-</body>
+  </head>
+  <body>
+    <div class="MainContainer">
+      <div class="CloneInputContainer">
+        <label for="CloneURLInput">URL of project to clone:</label>
+        <input
+          type="url"
+          id="CloneURLInput"
+          name="CloneURLInput"
+          placeholder="URL"
+        />
+        <label for="CloneDirInput"
+          >Directory to clone (relative to backend):
+        </label>
+        <input
+          type="text"
+          id="CloneDirInput"
+          name="CloneDirInput"
+          placeholder="Empty for default"
+        />
+      </div>
+      <div class="ProgressViewer">
+        <progress id="GitProgressBar" value="0" max="100">0%</progress>
+        <div id="GitProgressPercentage">0%</div>
+      </div>
+
+      <button id="CloneButton" class="button-21" onclick="clone()">
+        Click to clone
+      </button>
+    </div>
+  </body>
 </html>
