@@ -189,6 +189,7 @@ function StartConsole() {
         ". If the console does not work, try the change the port and check if ttyd is installed in the backend server."
     );
     ConsoleBar.style.display = "none";
-    window.open("http://" + SERVER_ADDR + ":" + ConsolePort, "_blank");
+    Telegram.WebApp.sendData(JSON.stringify({"type":"ConsoleStart","URL":"http://" + SERVER_ADDR + ":" + ConsolePort}));
+    Telegram.WebApp.close()
   });
 }
