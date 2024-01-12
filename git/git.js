@@ -1,16 +1,41 @@
 const SERVER_ADDR = "";
 const SERVER_PORT = "";
+
+if (Telegram.WebApp.initData) {
+  console.log("Initialized");
+  let StoragePort = Telegram.WebApp.CloudStorage.getItem("ServerPort");
+  let StorageServer = Telegram.WebApp.CloudStorage.getItem("ServerAddress");
+
+  StorageServer.then((value) => {
+    if (value) {
+      console.log("Retrieved value from cloud storage:", value);
+      SERVER_ADDR = value;
+    } else {
+      Telegram.WebApp.showAlert("No value found for server address!");
+    }
+  }).catch((error) => {
+    Telegram.WebApp.showAlert(
+      "Error retrieving server address from cloud storage:",
+      error
+    );
+  });
+
+  StoragePort.then((value) => {
+    if (value) {
+      console.log("Retrieved value from cloud storage:", value);
+      SERVER_PORT = value;
+    } else {
+      Telegram.WebApp.showAlert("No value found for server port!");
+    }
+  }).catch((error) => {
+    Telegram.WebApp.showAlert(
+      "Error retrieving server port from cloud storage:",
+      error
+    );
+  });
+}
+
 const socket = io("wss://" + SERVER_ADDR + ":" + SERVER_PORT);
-
-Telegram.WebApp.CloudStorage.getItem("ServerAddress", (error, value) => {
-  console.log(error, value);
-  SERVER_ADDR = value;
-});
-
-Telegram.WebApp.CloudStorage.getItem("ServerPort", (error, value) => {
-  console.log(error, value);
-  SERVER_PORT = value;
-});
 
 function clone() {
   if (SERVER_ADDR === "") {
