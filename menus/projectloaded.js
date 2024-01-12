@@ -55,7 +55,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
     document.getElementById("ProjectNameDisplay").innerHTML = value;
   });
   SetupServer();
-  SetupMonitors();
   ShowDashboard();
 });
 
@@ -96,10 +95,15 @@ function SetupServer() {
 function SetupSocket() {
   if (SERVER_ADDR != "" && SERVER_PORT != "" && socket == null) {
     socket = io("wss://" + SERVER_ADDR + ":" + SERVER_PORT);
+    SetupMonitors();
   }
 }
 
 function SetupMonitors() {
+  if (!socket.connected) {
+    setTimeout(SetupMonitors, 1000);
+    return;
+  }
   socket.on("SystemUsageStat", (arg, callback) => {
     CPUPercentage = arg["CPU"];
     MemPercentage = arg["Memory"];
@@ -117,7 +121,8 @@ function SetupMonitors() {
     document
       .getElementById("DiskPercentage")
       .setAttribute("stroke-dashoffset", 628 * ((100 - DiskPercentage) / 100));
-    document.getElementById("DiskPercentageText").innerHTML = DiskPercentage + "%";
+    document.getElementById("DiskPercentageText").innerHTML =
+      DiskPercentage + "%";
   });
 }
 
@@ -131,6 +136,7 @@ function HideAll() {
 function ShowDashboard() {
   HideAll();
   document.getElementById("DashboardDisplay").style.display = "inline";
+  console.log("Setted up dashboard");
 }
 
 function ShowStats() {
