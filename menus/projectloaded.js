@@ -131,6 +131,7 @@ function HideAll() {
   document.getElementById("StatsDisplay").style.display = "none";
   document.getElementById("OutputDisplay").style.display = "none";
   document.getElementById("ConsoleDisplay").style.display = "none";
+  document.getElementById("SettingsDisplay").style.display = "none";
 }
 
 function ShowDashboard() {
@@ -151,4 +152,9 @@ function ShowOutput() {
 function ShowConsole() {
   HideAll();
   document.getElementById("ConsoleDisplay").style.display = "inline";
+}
+
+function ShowSettings() {
+  HideAll();
+  document.getElementById("SettingsDisplay").style.display = "inline";
 }
