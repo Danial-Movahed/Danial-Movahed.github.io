@@ -100,7 +100,7 @@ function SetupSocket() {
 }
 
 function SetupMonitors() {
-  socket.on("SystemMonitorStat", (arg, callback) => {
+  socket.on("SystemUsageStat", (arg, callback) => {
     CPUPercentage = arg["CPU"];
     MemPercentage = arg["Memory"];
     DiskPercentage = arg["Disk"];
