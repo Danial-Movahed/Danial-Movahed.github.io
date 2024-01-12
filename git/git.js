@@ -1,3 +1,4 @@
+Telegram.WebApp.ready();
 var SERVER_ADDR = "";
 var SERVER_PORT = "";
 
@@ -74,8 +75,15 @@ function Clone() {
   socket.on("CloneStatus", (arg, callback) => {
     ProgressBar.style.display = "none";
     ProgressPercentage.style.display = "none";
+    arg = arg.split(" ");
     console.log(arg);
-    if (arg === "Success") {
+    if (arg[0] === "Success") {
+      window.Telegram.WebApp.sendData(JSON.stringify(
+        {
+          "type": "Load",
+          "Project": arg[1]
+        }
+      ));
       return;
     }
     Telegram.WebApp.showAlert(
