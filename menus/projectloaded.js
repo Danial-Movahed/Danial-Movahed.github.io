@@ -1,6 +1,7 @@
 var SERVER_ADDR = "";
 var SERVER_PORT = "";
 var socket = null;
+var currentProject = "";
 
 document.addEventListener("DOMContentLoaded", function (event) {
   const showNavbar = (toggleId, navId, bodyId, headerId) => {
@@ -52,7 +53,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
       return;
     }
     console.log("Retrieved loaded project from cloud storage:", value);
-    document.getElementById("ProjectNameDisplay").innerHTML = value;
+    currentProject = value
+    document.getElementById("ProjectNameDisplay").innerHTML = currentProject;
   });
   SetupServer();
   ShowDashboard();
@@ -157,4 +159,14 @@ function ShowConsole() {
 function ShowSettings() {
   HideAll();
   document.getElementById("SettingsDisplay").style.display = "inline";
+}
+
+function UnloadProject() {
+    var data = {
+        "type": "Unload",
+        "Project": currentProject
+    }
+    Telegram.WebApp.CloudStorage.removeItem("LoadedProject");
+    Telegram.WebApp.sendData(JSON.stringify(data));
+    Telegram.WebApp.close();
 }
