@@ -51,6 +51,8 @@ function Clone() {
   }
   ProgressBar = document.getElementById("GitProgressBar");
   ProgressPercentage = document.getElementById("GitProgressPercentage");
+  CloneURL = document.getElementById("CloneURLInput");
+  CloneDir = document.getElementById("CloneDirInput");
 
   var xhr = new XMLHttpRequest();
   xhr.open(
@@ -61,29 +63,36 @@ function Clone() {
   xhr.setRequestHeader("Content-Type", "application/json");
   xhr.send(
     JSON.stringify({
-      URL: document.getElementById("CloneURLInput").value,
-      Directory: document.getElementById("CloneDirInput").value,
+      URL: CloneURL.value,
+      Directory: CloneDir.value,
     })
   );
 
   ProgressBar.style.display = "inline";
   ProgressPercentage.style.display = "inline";
   ProgressBar.removeAttribute("value");
+  CloneURL.disabled="true";
+  CloneDir.disabled="true";
   socket.on("CloneMaxProgress", (arg, callback) => {
     ProgressBar.max = arg;
   });
   socket.on("CloneStatus", (arg, callback) => {
     ProgressBar.style.display = "none";
     ProgressPercentage.style.display = "none";
-    arg = arg.split(" ");
+    CloneURL.removeAttribute("disabled");
+    CloneDir.removeAttribute("disabled");
     console.log(arg);
-    if (arg[0] === "Success") {
-      window.Telegram.WebApp.sendData(JSON.stringify(
-        {
-          "type": "Load",
-          "Project": arg[1]
-        }
-      ));
+    if (arg === "Success") {
+      var data = {
+        "type": "Load"
+      }
+      if (CloneDir.value === "") {
+        gitName = CloneURL.split("/")[CloneURL.split("/").length - 1]
+        data["Project"] = gitName.substring(0, gitName.lastIndexOf('.git')) || gitName
+      } else {
+        data["Project"] = CloneDir.split("/")[CloneURL.split("/").length - 1]
+      }
+      window.Telegram.WebApp.sendData(JSON.stringify(data));
       return;
     }
     Telegram.WebApp.showAlert(
