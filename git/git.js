@@ -92,6 +92,7 @@ function Clone() {
       } else {
         data["Project"] = CloneDir.value.split("/")[CloneURL.value.split("/").length - 1]
       }
+      Telegram.WebApp.CloudStorage.setItem("LoadedProject", data["Project"])
       Telegram.WebApp.sendData(JSON.stringify(data));
       Telegram.WebApp.close()
       return;
