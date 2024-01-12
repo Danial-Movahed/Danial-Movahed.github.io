@@ -1,5 +1,5 @@
-const SERVER_ADDR = "";
-const SERVER_PORT = "";
+var SERVER_ADDR = "";
+var SERVER_PORT = "";
 
 Telegram.WebApp.CloudStorage.getItem("ServerAddress", (error, value) => {
   if (error) {
@@ -31,7 +31,7 @@ Telegram.WebApp.CloudStorage.getItem("ServerPort", (error, value) => {
   SERVER_PORT = value;
 });
 
-const socket = null;
+var socket = null;
 
 function clone() {
   if(socket === null) {
