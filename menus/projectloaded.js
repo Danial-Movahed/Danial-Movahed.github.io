@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
       return;
     }
     console.log("Retrieved loaded project from cloud storage:", value);
-    currentProject = value
+    currentProject = value;
     document.getElementById("ProjectNameDisplay").innerHTML = currentProject;
   });
   SetupServer();
@@ -162,11 +162,33 @@ function ShowSettings() {
 }
 
 function UnloadProject() {
-    var data = {
-        "type": "Unload",
-        "Project": currentProject
-    }
-    Telegram.WebApp.CloudStorage.removeItem("LoadedProject");
-    Telegram.WebApp.sendData(JSON.stringify(data));
-    Telegram.WebApp.close();
+  var data = {
+    type: "Unload",
+    Project: currentProject,
+  };
+  Telegram.WebApp.CloudStorage.removeItem("LoadedProject");
+  Telegram.WebApp.sendData(JSON.stringify(data));
+  Telegram.WebApp.close();
+}
+
+function StartConsole() {
+  ConsolePort = document.getElementById("ConsolePort").value;
+  ConsoleBar = document.getElementById("ConsoleStartBar");
+  re =
+    /^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$/;
+  if (!re.test(ConsolePort)) {
+    Telegram.WebApp.showAlert("Enter port number correctly.");
+    return;
+  }
+  ConsoleBar.style.display = "block";
+  socket.emit("Console", { data: "Start", port: ConsolePort });
+  socket.on("ConsoleStarted", (arg, callback) => {
+    Telegram.WebApp.showAlert(
+      "Console started on port " +
+        ConsolePort +
+        ". If the console does not work, try the change the port and check if ttyd is installed in the backend server."
+    );
+    ConsoleBar.style.display = "none";
+    window.open("http://" + SERVER_ADDR + ":" + ConsolePort, "_blank");
+  });
 }
