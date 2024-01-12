@@ -14,6 +14,7 @@ Telegram.WebApp.CloudStorage.getItem("ServerAddress", (error, value) => {
   }
   console.log("Retrieved server address from cloud storage:", value);
   SERVER_ADDR = value;
+  SetupSocket();
 });
 
 Telegram.WebApp.CloudStorage.getItem("ServerPort", (error, value) => {
@@ -29,14 +30,18 @@ Telegram.WebApp.CloudStorage.getItem("ServerPort", (error, value) => {
   }
   console.log("Retrieved server port from cloud storage:", value);
   SERVER_PORT = value;
+  SetupSocket();
 });
 
 var socket = null;
 
-function clone() {
-  if(socket === null) {
+function SetupSocket() {
+  if(SERVER_ADDR != "" && SERVER_PORT != "" && socket == null) {
     socket = io("wss://" + SERVER_ADDR + ":" + SERVER_PORT);
   }
+}
+
+function Clone() {
   if (!socket.connected) {
     Telegram.WebApp.showAlert(
       "Something is wrong with the server connection, Please check your settings and try again!"
@@ -49,7 +54,7 @@ function clone() {
   var xhr = new XMLHttpRequest();
   xhr.open(
     "POST",
-    "http://" + SERVER_ADDR + ":" + SERVER_PORT + "/git/clone",
+    "https://" + SERVER_ADDR + ":" + SERVER_PORT + "/git/clone",
     true
   );
   xhr.setRequestHeader("Content-Type", "application/json");
