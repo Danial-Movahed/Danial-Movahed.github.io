@@ -126,6 +126,16 @@ function SetupMonitors() {
     document.getElementById("DiskPercentageText").innerHTML =
       DiskPercentage + "%";
   });
+  SetupLogs();
+}
+
+function SetupLogs() {
+    socket.on("BuildLog", (arg, callback) => {
+        console.log(arg);
+    });
+    socket.on("BuildError", (arg, callback) => {
+        console.log(arg);
+    });
 }
 
 function HideAll() {
@@ -192,4 +202,8 @@ function StartConsole() {
     Telegram.WebApp.sendData(JSON.stringify({"type":"ConsoleStart","URL":"http://" + SERVER_ADDR + ":" + ConsolePort}));
     Telegram.WebApp.close()
   });
+}
+
+function StartBuild() {
+    socket.emit("StartBuild", {Project:currentProject});
 }
