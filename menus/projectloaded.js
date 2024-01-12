@@ -130,11 +130,15 @@ function SetupMonitors() {
 }
 
 function SetupLogs() {
+    latestLog = document.getElementById("LatestLog")
+    latestError = document.getElementById("LatestError")
     socket.on("BuildLog", (arg, callback) => {
         console.log(arg);
+        latestLog.innerHTML = arg["line"]
     });
     socket.on("BuildError", (arg, callback) => {
         console.log(arg);
+        latestError.innerHTML = arg["line"]
     });
 }
 

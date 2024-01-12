@@ -12,7 +12,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"
     />
-    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="navbar.css" />
     <link rel="stylesheet" href="projectloaded.css" />
     <link rel="stylesheet" href="../common/style.css" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
@@ -210,11 +210,15 @@
         </div>
       </div>
       <div class="RunningStatus">Running</div>
-      <div class="ErrorStatus">No errors :)</div>
+      <div class="ErrorStatus">
+        Latest error message:
+        <br />
+        <code id="LatestError">Nothing</code>
+      </div>
       <div class="LogMsg">
         Latest log message:
         <br />
-        <code>Something is doing something!</code>
+        <code id="LatestLog">Something is doing something!</code>
       </div>
       <button class="button-21" id="StartBuildBtn" onclick="StartBuild();">
         Start build!
@@ -240,8 +244,20 @@
       <div class="StartConsoleContainer">
         <progress id="ConsoleStartBar"></progress>
         <div class="ConsoleInput">
-          <label for="ConsolePort">Port number:</label> <input inputmode="numeric" type="text" name="ConsolePort" id="ConsolePort">
-          <button class="button-21" id="StartConsoleBtn" onclick="StartConsole()">Start a console</button>
+          <label for="ConsolePort">Port number:</label>
+          <input
+            inputmode="numeric"
+            type="text"
+            name="ConsolePort"
+            id="ConsolePort"
+          />
+          <button
+            class="button-21"
+            id="StartConsoleBtn"
+            onclick="StartConsole()"
+          >
+            Start a console
+          </button>
         </div>
       </div>
     </div>
