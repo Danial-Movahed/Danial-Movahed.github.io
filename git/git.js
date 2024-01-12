@@ -1,6 +1,16 @@
-const SERVER_ADDR = Telegram.WebApp.CloudStorage.getItem("ServerAddress");
-const SERVER_PORT = Telegram.WebApp.CloudStorage.getItem("ServerPort");
-const socket = io("ws://" + SERVER_ADDR + ":" + SERVER_PORT);
+const SERVER_ADDR = "";
+const SERVER_PORT = "";
+const socket = io("wss://" + SERVER_ADDR + ":" + SERVER_PORT);
+
+Telegram.WebApp.CloudStorage.getItem("ServerAddress", (error, value) => {
+  console.log(error, value);
+  SERVER_ADDR = value;
+});
+
+Telegram.WebApp.CloudStorage.getItem("ServerPort", (error, value) => {
+  console.log(error, value);
+  SERVER_PORT = value;
+});
 
 function clone() {
   if (SERVER_ADDR === "") {
@@ -12,7 +22,9 @@ function clone() {
     return;
   }
   if (!socket.connected) {
-    Telegram.WebApp.showAlert("Something is wrong with the server connection, Please check your settings and try again!");
+    Telegram.WebApp.showAlert(
+      "Something is wrong with the server connection, Please check your settings and try again!"
+    );
     return;
   }
   ProgressBar = document.getElementById("GitProgressBar");
@@ -45,7 +57,9 @@ function clone() {
     if (arg === "Success") {
       return;
     }
-    Telegram.WebApp.showAlert("Error occurred while cloning the repository: " + arg);
+    Telegram.WebApp.showAlert(
+      "Error occurred while cloning the repository: " + arg
+    );
   });
   socket.on("CloneProgress", (arg, callback) => {
     ProgressBar.value = arg;
