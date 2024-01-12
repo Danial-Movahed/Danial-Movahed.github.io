@@ -82,7 +82,7 @@ function Clone() {
     CloneURL.removeAttribute("disabled");
     CloneDir.removeAttribute("disabled");
     console.log(arg);
-    if (arg === "Success") {
+    if (arg["data"] === "Success") {
       var data = {
         "type": "Load"
       }
@@ -92,8 +92,8 @@ function Clone() {
       } else {
         data["Project"] = CloneDir.value.split("/")[CloneURL.value.split("/").length - 1]
       }
-      window.Telegram.WebApp.sendData(JSON.stringify(data));
-      window.Telegram.WebApp.close()
+      Telegram.WebApp.sendData(JSON.stringify(data));
+      Telegram.WebApp.close()
       return;
     }
     Telegram.WebApp.showAlert(
