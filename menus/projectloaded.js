@@ -1,3 +1,7 @@
+var SERVER_ADDR = "";
+var SERVER_PORT = "";
+var socket = null;
+
 document.addEventListener("DOMContentLoaded", function (event) {
   const showNavbar = (toggleId, navId, bodyId, headerId) => {
     const toggle = document.getElementById(toggleId),
@@ -50,8 +54,72 @@ document.addEventListener("DOMContentLoaded", function (event) {
     console.log("Retrieved loaded project from cloud storage:", value);
     document.getElementById("ProjectNameDisplay").innerHTML = value;
   });
+  SetupServer();
+  SetupMonitors();
   ShowDashboard();
 });
+
+function SetupServer() {
+  Telegram.WebApp.CloudStorage.getItem("ServerAddress", (error, value) => {
+    if (error) {
+      Telegram.WebApp.showAlert(
+        "An error occurred while getting the server address"
+      );
+      return;
+    }
+    if (!value) {
+      Telegram.WebApp.showAlert("No value found for server address!");
+      return;
+    }
+    console.log("Retrieved server address from cloud storage:", value);
+    SERVER_ADDR = value;
+    SetupSocket();
+  });
+
+  Telegram.WebApp.CloudStorage.getItem("ServerPort", (error, value) => {
+    if (error) {
+      Telegram.WebApp.showAlert(
+        "An error occurred while getting the server port"
+      );
+      return;
+    }
+    if (!value) {
+      Telegram.WebApp.showAlert("No value found for server port!");
+      return;
+    }
+    console.log("Retrieved server port from cloud storage:", value);
+    SERVER_PORT = value;
+    SetupSocket();
+  });
+}
+
+function SetupSocket() {
+  if (SERVER_ADDR != "" && SERVER_PORT != "" && socket == null) {
+    socket = io("wss://" + SERVER_ADDR + ":" + SERVER_PORT);
+  }
+}
+
+function SetupMonitors() {
+  socket.on("SystemMonitorStat", (arg, callback) => {
+    CPUPercentage = arg["CPU"];
+    MemPercentage = arg["Memory"];
+    DiskPercentage = arg["Disk"];
+    document
+      .getElementById("CPUPercentage")
+      .setAttribute("stroke-dashoffset", 628 * ((100 - CPUPercentage) / 100));
+    document.getElementById("CPUPercentageText").innerHTML =
+      CPUPercentage + "%";
+    document
+      .getElementById("MemPercentage")
+      .setAttribute("stroke-dashoffset", 628 * ((100 - MemPercentage) / 100));
+    document.getElementById("MemPercentageText").innerHTML =
+      MemPercentage + "%";
+    document
+      .getElementById("DiskPercentage")
+      .setAttribute("stroke-dashoffset", 628 * ((100 - DiskPercentage) / 100));
+    document.getElementById("DiskPercentageText").innerHTML = DiskPercentage + "%";
+  });
+}
 
 function HideAll() {
   document.getElementById("DashboardDisplay").style.display = "none";
@@ -62,20 +130,20 @@ function HideAll() {
 
 function ShowDashboard() {
   HideAll();
-  document.getElementById("DashboardDisplay").style.display = "flex";
+  document.getElementById("DashboardDisplay").style.display = "inline";
 }
 
 function ShowStats() {
   HideAll();
-  document.getElementById("StatsDisplay").style.display = "flex";
+  document.getElementById("StatsDisplay").style.display = "inline";
 }
 
 function ShowOutput() {
   HideAll();
-  document.getElementById("OutputDisplay").style.display = "flex";
+  document.getElementById("OutputDisplay").style.display = "inline";
 }
 
 function ShowConsole() {
   HideAll();
-  document.getElementById("ConsoleDisplay").style.display = "flex";
+  document.getElementById("ConsoleDisplay").style.display = "inline";
 }

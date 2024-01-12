@@ -16,6 +16,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.3/socket.io.js"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <script src="projectloaded.js"></script>
   </head>
   <body id="body-pd">
@@ -29,7 +34,9 @@
         <div>
           <a href="#" class="nav_logo">
             <i class="bx bx-layer nav_logo-icon"></i>
-            <span class="nav_logo-name" id="ProjectNameDisplay">Project name</span>
+            <span class="nav_logo-name" id="ProjectNameDisplay"
+              >Project name</span
+            >
           </a>
           <div class="nav_list">
             <span onclick="ShowDashboard()" class="nav_link active">
@@ -37,8 +44,8 @@
               <span class="nav_name">Dashboard</span>
             </span>
             <span onclick="ShowStats()" class="nav_link">
-                <i class="bx bx-bar-chart-alt-2 nav_icon"></i>
-                <span class="nav_name">Stats</span>
+              <i class="bx bx-bar-chart-alt-2 nav_icon"></i>
+              <span class="nav_name">Stats</span>
             </span>
             <span onclick="ShowOutput()" class="nav_link">
               <i class="bx bx-code-block nav_icon"></i>
@@ -48,7 +55,6 @@
               <i class="bx bx-terminal nav_icon"></i>
               <span class="nav_name">Console</span>
             </span>
-            
           </div>
         </div>
         <!-- <a href="#" class="nav_link">
@@ -60,15 +66,166 @@
     <!--Container Main start-->
     <div class="height-100 bg-light" id="DashboardDisplay">
       <h4>Dashboard</h4>
+      <div class="Monitors">
+        <div class="CPUMonitor Monitor">
+          <svg
+            width="220"
+            height="220"
+            viewBox="-27.5 -27.5 275 275"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            style="transform: rotate(-90deg)"
+          >
+            <circle
+              r="100"
+              cx="110"
+              cy="110"
+              fill="transparent"
+              stroke="#e0e0e0"
+              stroke-width="19"
+              stroke-dasharray="628px"
+              stroke-dashoffset="0"
+            ></circle>
+            <circle
+              id="CPUPercentage"
+              r="100"
+              cx="110"
+              cy="110"
+              stroke="#d1683f"
+              stroke-width="13"
+              stroke-linecap="round"
+              stroke-dashoffset="308px"
+              fill="transparent"
+              stroke-dasharray="628px"
+            ></circle>
+            <text
+              id="CPUPercentageText"
+              x="60px"
+              y="128px"
+              fill="#d1683f"
+              font-size="52px"
+              font-weight="bold"
+              style="transform: rotate(90deg) translate(0px, -216px)"
+            >
+              51%
+            </text>
+          </svg>
+          <span class="CpuMonitorText MonitorText">Avg. CPU Usage</span>
+        </div>
+        <div class="MemMonitor Monitor">
+          <svg
+            width="220"
+            height="220"
+            viewBox="-27.5 -27.5 275 275"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            style="transform: rotate(-90deg)"
+          >
+            <circle
+              r="100"
+              cx="110"
+              cy="110"
+              fill="transparent"
+              stroke="#e0e0e0"
+              stroke-width="19"
+              stroke-dasharray="628px"
+              stroke-dashoffset="0"
+            ></circle>
+            <circle
+              id="MemPercentage"
+              r="100"
+              cx="110"
+              cy="110"
+              stroke="#bc44c2"
+              stroke-width="13"
+              stroke-linecap="round"
+              stroke-dashoffset="308px"
+              fill="transparent"
+              stroke-dasharray="628px"
+            ></circle>
+            <text
+              id="MemPercentageText"
+              x="60px"
+              y="128px"
+              fill="#bc44c2"
+              font-size="52px"
+              font-weight="bold"
+              style="transform: rotate(90deg) translate(0px, -216px)"
+            >
+              51%
+            </text>
+          </svg>
+          <span class="MemMonitorText MonitorText">Memory Usage</span>
+        </div>
+        <div class="DiskMonitor Monitor">
+          <svg
+            width="220"
+            height="220"
+            viewBox="-27.5 -27.5 275 275"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            style="transform: rotate(-90deg)"
+          >
+            <circle
+              r="100"
+              cx="110"
+              cy="110"
+              fill="transparent"
+              stroke="#e0e0e0"
+              stroke-width="19"
+              stroke-dasharray="628px"
+              stroke-dashoffset="0"
+            ></circle>
+            <circle
+              id="DiskPercentage"
+              r="100"
+              cx="110"
+              cy="110"
+              stroke="#76e5b1"
+              stroke-width="13"
+              stroke-linecap="round"
+              stroke-dashoffset="308px"
+              fill="transparent"
+              stroke-dasharray="628px"
+            ></circle>
+            <text
+              id="DiskPercentageText"
+              x="60px"
+              y="128px"
+              fill="#6bdba7"
+              font-size="52px"
+              font-weight="bold"
+              style="transform: rotate(90deg) translate(0px, -216px)"
+            >
+              51%
+            </text>
+          </svg>
+          <span class="DiskMonitorText MonitorText">Disk Usage</span>
+        </div>
+      </div>
+      <div class="RunningStatus">Running</div>
+      <div class="ErrorStatus">No errors :)</div>
+      <div class="LogMsg">
+        Latest log message:
+        <br />
+        <code>Something is doing something!</code>
+      </div>
+      <button class="StartBuildBtn" onclick="StartBuild();">
+        Start build!
+      </button>
+      <button class="TermBuildBtn" onclick="StartBuild();">
+        Terminate build!
+      </button>
+      <button class="KillBuildBtn" onclick="StartBuild();">Kill build!</button>
     </div>
     <div class="height-100 bg-light" id="StatsDisplay">
-        <h4>Stats</h4>
+      <h4>Stats</h4>
     </div>
     <div class="height-100 bg-light" id="OutputDisplay">
-        <h4>Output</h4>
+      <h4>Output</h4>
     </div>
     <div class="height-100 bg-light" id="ConsoleDisplay">
-        <h4>Console</h4>
+      <h4>Console</h4>
     </div>
   </body>
 </html>
