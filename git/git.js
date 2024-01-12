@@ -97,7 +97,7 @@ function Clone() {
       return;
     }
     Telegram.WebApp.showAlert(
-      "Error occurred while cloning the repository: " + arg
+      "Error occurred while cloning the repository: " + arg["data"]
     );
   });
   socket.on("CloneProgress", (arg, callback) => {
