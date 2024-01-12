@@ -87,12 +87,13 @@ function Clone() {
         "type": "Load"
       }
       if (CloneDir.value === "") {
-        gitName = CloneURL.split("/")[CloneURL.split("/").length - 1]
+        gitName = CloneURL.value.split("/")[CloneURL.value.split("/").length - 1]
         data["Project"] = gitName.substring(0, gitName.lastIndexOf('.git')) || gitName
       } else {
-        data["Project"] = CloneDir.split("/")[CloneURL.split("/").length - 1]
+        data["Project"] = CloneDir.value.split("/")[CloneURL.value.split("/").length - 1]
       }
       window.Telegram.WebApp.sendData(JSON.stringify(data));
+      window.Telegram.WebApp.close()
       return;
     }
     Telegram.WebApp.showAlert(
