@@ -110,17 +110,17 @@ function SetupMonitors() {
     DiskPercentage = arg["Disk"];
     document
       .getElementById("CPUPercentage")
-      .setAttribute("stroke-dashoffset", 628 * ((100 - CPUPercentage) / 100));
+      .setAttribute("stroke-dashoffset", 314 * ((100 - CPUPercentage) / 100));
     document.getElementById("CPUPercentageText").innerHTML =
       CPUPercentage + "%";
     document
       .getElementById("MemPercentage")
-      .setAttribute("stroke-dashoffset", 628 * ((100 - MemPercentage) / 100));
+      .setAttribute("stroke-dashoffset", 314 * ((100 - MemPercentage) / 100));
     document.getElementById("MemPercentageText").innerHTML =
       MemPercentage + "%";
     document
       .getElementById("DiskPercentage")
-      .setAttribute("stroke-dashoffset", 628 * ((100 - DiskPercentage) / 100));
+      .setAttribute("stroke-dashoffset", 314 * ((100 - DiskPercentage) / 100));
     document.getElementById("DiskPercentageText").innerHTML =
       DiskPercentage + "%";
   });
@@ -136,7 +136,6 @@ function HideAll() {
 function ShowDashboard() {
   HideAll();
   document.getElementById("DashboardDisplay").style.display = "inline";
-  console.log("Setted up dashboard");
 }
 
 function ShowStats() {

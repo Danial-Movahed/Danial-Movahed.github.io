@@ -69,135 +69,135 @@
       <div class="Monitors">
         <div class="CPUMonitor Monitor">
           <svg
-            width="220"
-            height="220"
-            viewBox="-27.5 -27.5 275 275"
+            width="120"
+            height="120"
+            viewBox="-15 -15 150 150"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
             style="transform: rotate(-90deg)"
           >
             <circle
-              r="100"
-              cx="110"
-              cy="110"
+              r="50"
+              cx="60"
+              cy="60"
               fill="transparent"
               stroke="#e0e0e0"
-              stroke-width="19"
-              stroke-dasharray="628px"
+              stroke-width="6"
+              stroke-dasharray="314px"
               stroke-dashoffset="0"
             ></circle>
             <circle
               id="CPUPercentage"
-              r="100"
-              cx="110"
-              cy="110"
+              r="50"
+              cx="60"
+              cy="60"
               stroke="#d1683f"
-              stroke-width="13"
+              stroke-width="10"
               stroke-linecap="round"
-              stroke-dashoffset="308px"
+              stroke-dashoffset="220px"
               fill="transparent"
-              stroke-dasharray="628px"
+              stroke-dasharray="314px"
             ></circle>
             <text
               id="CPUPercentageText"
-              x="60px"
-              y="128px"
+              x="34px"
+              y="70px"
               fill="#d1683f"
-              font-size="52px"
+              font-size="27px"
               font-weight="bold"
-              style="transform: rotate(90deg) translate(0px, -216px)"
+              style="transform: rotate(90deg) translate(0px, -116px)"
             >
-              51%
+              30%
             </text>
           </svg>
           <span class="CpuMonitorText MonitorText">Avg. CPU Usage</span>
         </div>
         <div class="MemMonitor Monitor">
           <svg
-            width="220"
-            height="220"
-            viewBox="-27.5 -27.5 275 275"
+            width="120"
+            height="120"
+            viewBox="-15 -15 150 150"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
             style="transform: rotate(-90deg)"
           >
             <circle
-              r="100"
-              cx="110"
-              cy="110"
+              r="50"
+              cx="60"
+              cy="60"
               fill="transparent"
               stroke="#e0e0e0"
-              stroke-width="19"
-              stroke-dasharray="628px"
+              stroke-width="6"
+              stroke-dasharray="314px"
               stroke-dashoffset="0"
             ></circle>
             <circle
               id="MemPercentage"
-              r="100"
-              cx="110"
-              cy="110"
+              r="50"
+              cx="60"
+              cy="60"
               stroke="#bc44c2"
-              stroke-width="13"
+              stroke-width="10"
               stroke-linecap="round"
-              stroke-dashoffset="308px"
+              stroke-dashoffset="220px"
               fill="transparent"
-              stroke-dasharray="628px"
+              stroke-dasharray="314px"
             ></circle>
             <text
               id="MemPercentageText"
-              x="60px"
-              y="128px"
+              x="34px"
+              y="70px"
               fill="#bc44c2"
-              font-size="52px"
+              font-size="27px"
               font-weight="bold"
-              style="transform: rotate(90deg) translate(0px, -216px)"
+              style="transform: rotate(90deg) translate(0px, -116px)"
             >
-              51%
+              30%
             </text>
           </svg>
           <span class="MemMonitorText MonitorText">Memory Usage</span>
         </div>
         <div class="DiskMonitor Monitor">
           <svg
-            width="220"
-            height="220"
-            viewBox="-27.5 -27.5 275 275"
+            width="120"
+            height="120"
+            viewBox="-15 -15 150 150"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
             style="transform: rotate(-90deg)"
           >
             <circle
-              r="100"
-              cx="110"
-              cy="110"
+              r="50"
+              cx="60"
+              cy="60"
               fill="transparent"
               stroke="#e0e0e0"
-              stroke-width="19"
-              stroke-dasharray="628px"
+              stroke-width="6"
+              stroke-dasharray="314px"
               stroke-dashoffset="0"
             ></circle>
             <circle
               id="DiskPercentage"
-              r="100"
-              cx="110"
-              cy="110"
+              r="50"
+              cx="60"
+              cy="60"
               stroke="#76e5b1"
-              stroke-width="13"
+              stroke-width="10"
               stroke-linecap="round"
-              stroke-dashoffset="308px"
+              stroke-dashoffset="220px"
               fill="transparent"
-              stroke-dasharray="628px"
+              stroke-dasharray="314px"
             ></circle>
             <text
               id="DiskPercentageText"
-              x="60px"
-              y="128px"
-              fill="#6bdba7"
-              font-size="52px"
+              x="34px"
+              y="70px"
+              fill="#76e5b1"
+              font-size="27px"
               font-weight="bold"
-              style="transform: rotate(90deg) translate(0px, -216px)"
+              style="transform: rotate(90deg) translate(0px, -116px)"
             >
-              51%
+              30%
             </text>
           </svg>
           <span class="DiskMonitorText MonitorText">Disk Usage</span>
@@ -217,6 +217,9 @@
         Terminate build!
       </button>
       <button class="KillBuildBtn" onclick="StartBuild();">Kill build!</button>
+      <button class="KillBuildBtn" onclick="StartBuild();">
+        Unload Project
+      </button>
     </div>
     <div class="height-100 bg-light" id="StatsDisplay">
       <h4>Stats</h4>
