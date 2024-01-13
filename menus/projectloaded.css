@@ -18,7 +18,7 @@
     display: none;
 }
 
-.OutputContainer {
+#OutputContainer {
     border-radius: 20px;
     background-color: lightgray;
     padding: 20px;
