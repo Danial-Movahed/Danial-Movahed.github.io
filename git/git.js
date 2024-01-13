@@ -40,6 +40,29 @@ function SetupSocket() {
   if (SERVER_ADDR != "" && SERVER_PORT != "" && socket == null) {
     socket = io("wss://" + SERVER_ADDR + ":" + SERVER_PORT);
   }
+  currURL = window.location.href.split("/")
+  if (currURL[currURL.length-1] === "load-project.html") {
+    LoadAvailableProjects();
+  }
+}
+
+function LoadAvailableProjects() {
+  if (!socket.connected) {
+    LoadAvailableProjects();
+    return;
+  }
+  Dropdown = document.getElementById("ProjectsDropdown");
+  Spinner = document.getElementById("spinner");
+  socket.emit("GetAvailableProjects", "");
+  socket.on("ListAvailableProjects", (arg, callback) => {
+    Spinner.style.display = "none";
+    arg["Projects"].forEach(element => {
+      var opt = document.createElement("option");
+      opt.value = element;
+      opt.innerHTML = element;
+      Dropdown.appendChild(opt);
+    });
+  });
 }
 
 function Clone() {

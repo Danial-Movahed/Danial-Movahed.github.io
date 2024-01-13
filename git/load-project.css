@@ -2,7 +2,6 @@
     font-family: "Open Sans";
   }
   .spinner {
-    /* width: fit-content; */
     animation: spin 1s infinite;
     height: 35px;
     width: 35px;
@@ -34,6 +33,7 @@
   .DropdownContainer {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
   }
   
   button {
@@ -47,6 +47,8 @@
     transition: 0.1s;
     text-align: center;
     border: none;
+    box-sizing: border-box;
+    font-size: 20px;
   }
   button:hover {
     background-color: #396fc5;
