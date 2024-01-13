@@ -98,12 +98,7 @@ function SetupSocket() {
   if (SERVER_ADDR != "" && SERVER_PORT != "" && socket == null) {
     socket = io("wss://" + SERVER_ADDR + ":" + SERVER_PORT);
     SetupMonitors();
-    CheckRunning();
   }
-}
-
-function CheckRunning() {
-  socket.emit("CheckRunningStatus", {});
 }
 
 function SetupMonitors() {
@@ -145,6 +140,11 @@ function SetupMonitors() {
       DiskPercentage + "%";
   });
   SetupLogs();
+  CheckRunning();
+}
+
+function CheckRunning() {
+  socket.emit("CheckRunningStatus", {});
 }
 
 function SetupLogs() {
