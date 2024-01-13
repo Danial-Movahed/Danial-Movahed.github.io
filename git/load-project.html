@@ -18,13 +18,8 @@
     ></script>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="git.js"></script>
-    <script>
-      window.onload = function (e) {
-        LoadAvailableProjects();
-      };
-    </script>
   </head>
-  <body>
+  <body onload="LoadAvailableProjects()">
     <div class="container">
       <div class="DropdownContainer">
         <select name="dropdown" class="dropdown" id="ProjectsDropdown"></select>
