@@ -17,3 +17,22 @@
 #ConsoleStartBar {
     display: none;
 }
+
+.OutputContainer {
+    border-radius: 20px;
+    background-color: lightgray;
+    padding: 20px;
+}
+
+.Output {
+    border-radius: 20px;
+}
+
+.log {
+    color: black;
+    font-family: monospace;
+}
+
+.error {
+    color: rgb(195, 32, 32);
+}

@@ -132,13 +132,21 @@ function SetupMonitors() {
 function SetupLogs() {
     latestLog = document.getElementById("LatestLog")
     latestError = document.getElementById("LatestError")
+    LogDisplay = document.getElementById("LogDisplay")
     socket.on("BuildLog", (arg, callback) => {
         console.log(arg);
         latestLog.innerHTML = arg["line"]
+        line = document.createElement("p")
+        line.classList.add("log");
+        LogDisplay.appendChild(line);
     });
     socket.on("BuildError", (arg, callback) => {
         console.log(arg);
         latestError.innerHTML = arg["line"]
+        line = document.createElement("p")
+        line.classList.add("log");
+        line.classList.add("error");
+        LogDisplay.appendChild(line);
     });
 }
 
