@@ -43,7 +43,12 @@ function SetupSocket() {
 }
 
 function LoadAvailableProjects() {
-  if (!socket.connected) {
+  try {
+    if (!socket.connected) {
+      setTimeout(LoadAvailableProjects, 1000);
+      return;
+    }
+  } catch (e) {
     setTimeout(LoadAvailableProjects, 1000);
     return;
   }
@@ -126,8 +131,7 @@ function Clone() {
       if (CloneDir.value === "") {
         gitName =
           CloneURL.value.split("/")[CloneURL.value.split("/").length - 1];
-        projName = 
-          gitName.substring(0, gitName.lastIndexOf(".git")) || gitName;
+        projName = gitName.substring(0, gitName.lastIndexOf(".git")) || gitName;
       } else {
         projName =
           CloneDir.value.split("/")[CloneURL.value.split("/").length - 1];
