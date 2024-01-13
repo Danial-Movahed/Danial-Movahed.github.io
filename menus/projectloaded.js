@@ -109,6 +109,8 @@ function SetupMonitors() {
   socket.on("RunningStatus", (arg, callback) => {
     StartBtn = document.getElementById("StartBuildBtn");
     RunningStatus = document.getElementById("RunningStatus");
+    KillBtn = document.getElementById("KillBuildBtn");
+    StopBtn = document.getElementById("StopBuildBtn");
     if (arg["data"]) {
       StartBtn.innerHTML = "Started build";
       StartBtn.disabled = true;
@@ -117,7 +119,11 @@ function SetupMonitors() {
     }
     RunningStatus.innerHTML = "Not Running";
     StartBtn.innerHTML = "Start build!";
+    KillBtn.innerHTML = "Kill build!";
+    StopBtn.innerHTML = "Stop build!"
     StartBtn.removeAttribute("disabled");
+    KillBtn.removeAttribute("disabled");
+    StopBtn.removeAttribute("disabled");
   });
   socket.on("SystemUsageStat", (arg, callback) => {
     CPUPercentage = arg["CPU"];
@@ -255,12 +261,6 @@ function StopBuild() {
   StopBtn = document.getElementById("StopBuildBtn");
   StopBtn.disabled = true;
   StopBtn.innerHTML = "Stopping build...";
-  socket.on("StopBuildStatus", (arg, callback) => {
-    if (arg["data"] == true) {
-      StopBtn.innerHTML = "Stop build!";
-      StopBtn.removeAttribute("disabled");
-    }
-  });
 }
 
 function KillBuild() {
@@ -268,10 +268,4 @@ function KillBuild() {
   KillBtn = document.getElementById("KillBuildBtn");
   KillBtn.disabled = true;
   KillBtn.innerHTML = "Killing build...";
-  socket.on("KillBuildStatus", (arg, callback) => {
-    if (arg["data"] == true) {
-      KillBtn.innerHTML = "Kill build!"
-      KillBtn.removeAttribute("disabled");
-    }
-  });
 }
