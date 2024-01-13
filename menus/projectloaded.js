@@ -144,7 +144,7 @@ function SetupMonitors() {
 }
 
 function CheckRunning() {
-  socket.emit("CheckRunningStatus", {});
+  socket.emit("CheckRunningStatus", { Project: currentProject });
 }
 
 function SetupLogs() {
@@ -248,4 +248,30 @@ function StartBuild() {
   StartBtn.disabled = true;
   StartBtn.innerHTML = "Starting Build...";
   socket.emit("StartBuild", { Project: currentProject });
+}
+
+function StopBuild() {
+  socket.emit("StopBuild", { Project: currentProject });
+  StopBtn = document.getElementById("StopBuildBtn");
+  StopBtn.disabled = true;
+  StopBtn.innerHTML = "Stopping build...";
+  socket.on("StopBuildStatus", (arg, callback) => {
+    if (arg["data"] == true) {
+      StopBtn.innerHTML = "Stop build!";
+      StopBtn.removeAttribute("disabled");
+    }
+  });
+}
+
+function KillBuild() {
+  socket.emit("KillBuild", { Project: currentProject });
+  KillBtn = document.getElementById("KillBuildBtn");
+  KillBtn.disabled = true;
+  KillBtn.innerHTML = "Killing build...";
+  socket.on("KillBuildStatus", (arg, callback) => {
+    if (arg["data"] == true) {
+      KillBtn.innerHTML = "Kill build!"
+      KillBtn.removeAttribute("disabled");
+    }
+  });
 }
