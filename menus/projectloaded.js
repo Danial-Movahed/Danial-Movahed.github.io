@@ -269,3 +269,16 @@ function KillBuild() {
   KillBtn.disabled = true;
   KillBtn.innerHTML = "Killing build...";
 }
+
+function CleanProject() {
+  socket.emit("CleanProject", { Project: currentProject });
+  CleanBtn = document.getElementById("CleanBtn");
+  CleanBtn.disabled = true;
+  CleanBtn.innerHTML = "Cleaning...";
+  socket.on("CleanProjectStatus", (arg, callback) => {
+    if (arg["data"]) {
+      CleanBtn.innerHTML = "Clean Project"
+      CleanBtn.removeAttribute("disabled")
+    }
+  })
+}
