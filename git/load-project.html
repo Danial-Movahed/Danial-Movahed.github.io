@@ -1,19 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Load Project</title>
-    <link rel="stylesheet" href="load-project.css">
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.3/socket.io.js"
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="load-project.css" />
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script src="git.js"></script>
-</head>
-<body>
-    Hmm
-</body>
+  </head>
+  <body>
+    <div class="container">
+        <div class="DropdownContainer">
+            <select name="dropdown" class="dropdown">
+                <option value="test1">Test</option>
+                <option value="test2">Test</option>
+                <option value="test3">Test</option>
+                <option value="test4">Test</option>
+                <option value="test5">Test</option>
+              </select>
+
+              <svg
+                class="spinner"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-loader"
+              >
+                <line x1="12" x2="12" y1="2" y2="6" />
+                <line x1="12" x2="12" y1="18" y2="22" />
+                <line x1="4.93" x2="7.76" y1="4.93" y2="7.76" />
+                <line x1="16.24" x2="19.07" y1="16.24" y2="19.07" />
+                <line x1="2" x2="6" y1="12" y2="12" />
+                <line x1="18" x2="22" y1="12" y2="12" />
+                <line x1="4.93" x2="7.76" y1="19.07" y2="16.24" />
+                <line x1="16.24" x2="19.07" y1="7.76" y2="4.93" />
+              </svg>
+        </div>
+        <button>Button</button>
+    </div>
+  </body>
 </html>

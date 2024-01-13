@@ -37,7 +37,7 @@ Telegram.WebApp.CloudStorage.getItem("ServerPort", (error, value) => {
 var socket = null;
 
 function SetupSocket() {
-  if(SERVER_ADDR != "" && SERVER_PORT != "" && socket == null) {
+  if (SERVER_ADDR != "" && SERVER_PORT != "" && socket == null) {
     socket = io("wss://" + SERVER_ADDR + ":" + SERVER_PORT);
   }
 }
@@ -71,8 +71,8 @@ function Clone() {
   ProgressBar.style.display = "inline";
   ProgressPercentage.style.display = "inline";
   ProgressBar.removeAttribute("value");
-  CloneURL.disabled="true";
-  CloneDir.disabled="true";
+  CloneURL.disabled = "true";
+  CloneDir.disabled = "true";
   socket.on("CloneMaxProgress", (arg, callback) => {
     ProgressBar.max = arg;
   });
@@ -84,17 +84,20 @@ function Clone() {
     console.log(arg);
     if (arg["data"] === "Success") {
       var data = {
-        "type": "Load"
-      }
+        type: "Load",
+      };
       if (CloneDir.value === "") {
-        gitName = CloneURL.value.split("/")[CloneURL.value.split("/").length - 1]
-        data["Project"] = gitName.substring(0, gitName.lastIndexOf('.git')) || gitName
+        gitName =
+          CloneURL.value.split("/")[CloneURL.value.split("/").length - 1];
+        data["Project"] =
+          gitName.substring(0, gitName.lastIndexOf(".git")) || gitName;
       } else {
-        data["Project"] = CloneDir.value.split("/")[CloneURL.value.split("/").length - 1]
+        data["Project"] =
+          CloneDir.value.split("/")[CloneURL.value.split("/").length - 1];
       }
-      Telegram.WebApp.CloudStorage.setItem("LoadedProject", data["Project"])
+      Telegram.WebApp.CloudStorage.setItem("LoadedProject", data["Project"]);
       Telegram.WebApp.sendData(JSON.stringify(data));
-      Telegram.WebApp.close()
+      Telegram.WebApp.close();
       return;
     }
     Telegram.WebApp.showAlert(
