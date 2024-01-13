@@ -138,6 +138,7 @@ function SetupLogs() {
         latestLog.innerHTML = arg["line"]
         line = document.createElement("p")
         line.classList.add("log");
+        line.innerHTML = arg["line"]
         LogDisplay.appendChild(line);
     });
     socket.on("BuildError", (arg, callback) => {
@@ -146,6 +147,7 @@ function SetupLogs() {
         line = document.createElement("p")
         line.classList.add("log");
         line.classList.add("error");
+        line.innerHTML = arg["line"]
         LogDisplay.appendChild(line);
     });
 }
