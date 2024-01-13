@@ -43,8 +43,9 @@ function SetupSocket() {
 }
 
 function LoadAvailableProjects() {
+  console.log("Ran!");
   if (!socket.connected) {
-    LoadAvailableProjects();
+    setTimeout(LoadAvailableProjects, 1000);
     return;
   }
   Dropdown = document.getElementById("ProjectsDropdown");
@@ -52,7 +53,7 @@ function LoadAvailableProjects() {
   socket.emit("GetAvailableProjects", "");
   socket.on("ListAvailableProjects", (arg, callback) => {
     Spinner.style.display = "none";
-    arg["Projects"].forEach(element => {
+    arg["Projects"].forEach((element) => {
       var opt = document.createElement("option");
       opt.value = element;
       opt.innerHTML = element;
