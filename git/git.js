@@ -61,6 +61,25 @@ function LoadAvailableProjects() {
   });
 }
 
+function LoadProject(name) {
+  var data = {
+    type: "Load",
+  };
+  data["Project"] = name;
+  Telegram.WebApp.CloudStorage.setItem("LoadedProject", data["Project"]);
+  Telegram.WebApp.sendData(JSON.stringify(data));
+  Telegram.WebApp.close();
+}
+
+function LoadSelectedProject() {
+  Dropdown = document.getElementById("ProjectsDropdown");
+  if (Dropdown.value == "") {
+    Telegram.WebApp.showAlert("Please select a project!");
+    return;
+  }
+  LoadProject(Dropdown.value);
+}
+
 function Clone() {
   if (!socket.connected) {
     Telegram.WebApp.showAlert(
@@ -100,23 +119,18 @@ function Clone() {
     ProgressPercentage.style.display = "none";
     CloneURL.removeAttribute("disabled");
     CloneDir.removeAttribute("disabled");
-    console.log(arg);
+    var projName = "";
     if (arg["data"] === "Success") {
-      var data = {
-        type: "Load",
-      };
       if (CloneDir.value === "") {
         gitName =
           CloneURL.value.split("/")[CloneURL.value.split("/").length - 1];
-        data["Project"] =
+        projName = 
           gitName.substring(0, gitName.lastIndexOf(".git")) || gitName;
       } else {
-        data["Project"] =
+        projName =
           CloneDir.value.split("/")[CloneURL.value.split("/").length - 1];
       }
-      Telegram.WebApp.CloudStorage.setItem("LoadedProject", data["Project"]);
-      Telegram.WebApp.sendData(JSON.stringify(data));
-      Telegram.WebApp.close();
+      LoadProject(projName);
       return;
     }
     Telegram.WebApp.showAlert(
