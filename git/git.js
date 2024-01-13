@@ -43,7 +43,6 @@ function SetupSocket() {
 }
 
 function LoadAvailableProjects() {
-  console.log("Ran!");
   if (!socket.connected) {
     setTimeout(LoadAvailableProjects, 1000);
     return;
