@@ -130,26 +130,28 @@ function SetupMonitors() {
 }
 
 function SetupLogs() {
-    latestLog = document.getElementById("LatestLog")
-    latestError = document.getElementById("LatestError")
-    LogDisplay = document.getElementById("LogDisplay")
-    socket.on("BuildLog", (arg, callback) => {
-        console.log(arg);
-        latestLog.innerHTML = arg["line"]
-        line = document.createElement("p")
-        line.classList.add("log");
-        line.innerHTML = arg["line"]
-        LogDisplay.appendChild(line);
-    });
-    socket.on("BuildError", (arg, callback) => {
-        console.log(arg);
-        latestError.innerHTML = arg["line"]
-        line = document.createElement("p")
-        line.classList.add("log");
-        line.classList.add("error");
-        line.innerHTML = arg["line"]
-        LogDisplay.appendChild(line);
-    });
+  latestLog = document.getElementById("LatestLog");
+  latestError = document.getElementById("LatestError");
+  LogDisplay = document.getElementById("LogDisplay");
+  socket.on("BuildLog", (arg, callback) => {
+    console.log(arg);
+    latestLog.innerHTML = arg["line"];
+    line = document.createElement("p");
+    line.classList.add("log");
+    line.innerHTML = arg["line"];
+    LogDisplay.appendChild(line);
+    LogDisplay.scrollTo(0, LogDisplay.scrollHeight);
+  });
+  socket.on("BuildError", (arg, callback) => {
+    console.log(arg);
+    latestError.innerHTML = arg["line"];
+    line = document.createElement("p");
+    line.classList.add("log");
+    line.classList.add("error");
+    line.innerHTML = arg["line"];
+    LogDisplay.appendChild(line);
+    LogDisplay.scrollTo(0, LogDisplay.scrollHeight);
+  });
 }
 
 function HideAll() {
@@ -213,11 +215,16 @@ function StartConsole() {
         ". If the console does not work, try the change the port and check if ttyd is installed in the backend server."
     );
     ConsoleBar.style.display = "none";
-    Telegram.WebApp.sendData(JSON.stringify({"type":"ConsoleStart","URL":"http://" + SERVER_ADDR + ":" + ConsolePort}));
-    Telegram.WebApp.close()
+    Telegram.WebApp.sendData(
+      JSON.stringify({
+        type: "ConsoleStart",
+        URL: "http://" + SERVER_ADDR + ":" + ConsolePort,
+      })
+    );
+    Telegram.WebApp.close();
   });
 }
 
 function StartBuild() {
-    socket.emit("StartBuild", {Project:currentProject});
+  socket.emit("StartBuild", { Project: currentProject });
 }
