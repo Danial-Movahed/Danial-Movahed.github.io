@@ -98,7 +98,12 @@ function SetupSocket() {
   if (SERVER_ADDR != "" && SERVER_PORT != "" && socket == null) {
     socket = io("wss://" + SERVER_ADDR + ":" + SERVER_PORT);
     SetupMonitors();
+    CheckRunning();
   }
+}
+
+function CheckRunning() {
+  socket.emit("CheckRunningStatus", {});
 }
 
 function SetupMonitors() {
@@ -106,6 +111,19 @@ function SetupMonitors() {
     setTimeout(SetupMonitors, 1000);
     return;
   }
+  socket.on("RunningStatus", (arg, callback) => {
+    StartBtn = document.getElementById("StartBuildBtn");
+    RunningStatus = document.getElementById("RunningStatus");
+    if (arg["data"]) {
+      StartBtn.innerHTML = "Started build";
+      StartBtn.disabled = true;
+      RunningStatus.innerHTML = "Running";
+      return;
+    }
+    RunningStatus.innerHTML = "Not Running";
+    StartBtn.innerHTML = "Start build!";
+    StartBtn.removeAttribute("disabled");
+  });
   socket.on("SystemUsageStat", (arg, callback) => {
     CPUPercentage = arg["CPU"];
     MemPercentage = arg["Memory"];
@@ -226,5 +244,8 @@ function StartConsole() {
 }
 
 function StartBuild() {
+  StartBtn = document.getElementById("StartBuildBtn");
+  StartBtn.disabled = true;
+  StartBtn.innerHTML = "Starting Build...";
   socket.emit("StartBuild", { Project: currentProject });
 }
