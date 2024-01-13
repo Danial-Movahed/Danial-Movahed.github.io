@@ -71,7 +71,7 @@
     </div>
     <!--Container Main start-->
     <div class="height-100" id="DashboardDisplay">
-      <h4>Dashboard</h4>
+      <div class="title"><h4>Dashboard</h4></div>
       <div class="Monitors">
         <div class="CPUMonitor Monitor">
           <svg
@@ -106,10 +106,10 @@
             ></circle>
             <text
               id="CPUPercentageText"
-              x="34px"
-              y="70px"
+              x="40px"
+              y="64px"
               fill="#d1683f"
-              font-size="27px"
+              font-size="20px"
               font-weight="bold"
               style="transform: rotate(90deg) translate(0px, -116px)"
             >
@@ -151,10 +151,10 @@
             ></circle>
             <text
               id="MemPercentageText"
-              x="34px"
-              y="70px"
+              x="40px"
+              y="64px"
               fill="#bc44c2"
-              font-size="27px"
+              font-size="20px"
               font-weight="bold"
               style="transform: rotate(90deg) translate(0px, -116px)"
             >
@@ -196,10 +196,10 @@
             ></circle>
             <text
               id="DiskPercentageText"
-              x="34px"
-              y="70px"
+              x="40px"
+              y="64px"
               fill="#76e5b1"
-              font-size="27px"
+              font-size="20px"
               font-weight="bold"
               style="transform: rotate(90deg) translate(0px, -116px)"
             >
@@ -234,19 +234,43 @@
       </button>
     </div>
     <div class="height-100" id="StatsDisplay">
-      <h4>Stats</h4>
+      <div class="title"><h4>Stats</h4></div>
     </div>
     <div class="height-100" id="OutputDisplay">
-      <h4>Output</h4>
+      <div class="title"><h4>Output</h4></div>
       <div id="OutputContainer">
         <code class="Output" id="LogDisplay">
           <p class="log error">Some error...</p>
           <p class="log">Some log...</p>
+          <p class="log">Some log...</p>
+          <p class="log">Some log...</p>
+          <p class="log">Some log...</p>
+          <p class="log">Some log...</p>
+          <p class="log">Some log...</p>
+          <p class="log">Some log...</p>
+          <p class="log">Some log...</p>
+          <p class="log">Some log...</p>
+          <p class="log">Some log...</p>
+          <p class="log">Some log...</p>
+          <p class="log">Some log...</p>
+          <p class="log">Some log...</p>
+          <p class="log">Some log...</p>
+          <p class="log">Some log...</p>
+          <p class="log">Some log...</p>
+          <p class="log">Some log...</p>
+          <p class="log">Some log...</p>
+          <p class="log">Some log...</p>
+          <p class="log">Some log...</p>
+          <p class="log">Some log...</p>
+          <p class="log">Some log...</p>
+          <p class="log">Some log...</p>
+          <p class="log">Some log...</p>
         </code>
+        <div id="bottom"></div>
       </div>
     </div>
     <div class="height-100" id="ConsoleDisplay">
-      <h4>Console</h4>
+      <div class="title"><h4>Console</h4></div>
       <div class="StartConsoleContainer">
         <progress id="ConsoleStartBar"></progress>
         <div class="ConsoleInput">
@@ -268,7 +292,7 @@
       </div>
     </div>
     <div class="height-100" id="SettingsDisplay">
-      <h4>Settings</h4>
+      <div class="title"><h4>Settings</h4></div>
       <button class="button-21" id="ErrorReportingBtn">
         Enable error reporting in telegram bot
       </button>

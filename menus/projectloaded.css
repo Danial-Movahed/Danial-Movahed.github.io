@@ -22,10 +22,14 @@
     border-radius: 20px;
     background-color: lightgray;
     padding: 20px;
+    height: calc(100vh - 30px - 53px);
 }
 
-.Output {
-    border-radius: 20px;
+#Output {
+    overflow: scroll;
+    display: block;
+    overflow: scroll;
+    max-height: 100%;
 }
 
 .log {
@@ -37,4 +41,8 @@
 
 .error {
     color: rgb(195, 32, 32);
+}
+
+.title {
+    height: 30px;
 }
