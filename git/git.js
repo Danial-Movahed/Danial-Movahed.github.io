@@ -40,10 +40,6 @@ function SetupSocket() {
   if (SERVER_ADDR != "" && SERVER_PORT != "" && socket == null) {
     socket = io("wss://" + SERVER_ADDR + ":" + SERVER_PORT);
   }
-  currURL = window.location.href.split("/")
-  if (currURL[currURL.length-1] === "load-project.html") {
-    LoadAvailableProjects();
-  }
 }
 
 function LoadAvailableProjects() {
