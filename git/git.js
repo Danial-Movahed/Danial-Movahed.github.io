@@ -49,9 +49,11 @@ function LoadAvailableProjects() {
   }
   Dropdown = document.getElementById("ProjectsDropdown");
   Spinner = document.getElementById("spinner");
+  LoadBtn = document.getElementById("LoadBtn");
   socket.emit("GetAvailableProjects", "");
   socket.on("ListAvailableProjects", (arg, callback) => {
     Spinner.style.display = "none";
+    LoadBtn.removeAttribute("disabled");
     arg["Projects"].forEach((element) => {
       var opt = document.createElement("option");
       opt.value = element;
