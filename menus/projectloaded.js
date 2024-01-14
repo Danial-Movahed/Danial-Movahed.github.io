@@ -2,6 +2,7 @@ var SERVER_ADDR = "";
 var SERVER_PORT = "";
 var socket = null;
 var currentProject = "";
+var currentlyRunning = false;
 
 document.addEventListener("DOMContentLoaded", function (event) {
   const showNavbar = (toggleId, navId, bodyId, headerId) => {
@@ -111,10 +112,15 @@ function SetupMonitors() {
     RunningStatus = document.getElementById("RunningStatus");
     KillBtn = document.getElementById("KillBuildBtn");
     StopBtn = document.getElementById("StopBuildBtn");
+    CleanBtn = document.getElementById("CleanBtn");
     if (arg["data"]) {
       StartBtn.innerHTML = "Started build";
       StartBtn.disabled = true;
       RunningStatus.innerHTML = "Running";
+      currentlyRunning = true;
+      KillBtn.removeAttribute("disabled");
+      StopBtn.removeAttribute("disabled");
+      CleanBtn.disabled=true;
       return;
     }
     RunningStatus.innerHTML = "Not Running";
@@ -122,8 +128,10 @@ function SetupMonitors() {
     KillBtn.innerHTML = "Kill build!";
     StopBtn.innerHTML = "Stop build!";
     StartBtn.removeAttribute("disabled");
-    KillBtn.removeAttribute("disabled");
-    StopBtn.removeAttribute("disabled");
+    CleanBtn.removeAttribute("disabled");
+    KillBtn.disabled=true;
+    StopBtn.disabled=true;
+    currentlyRunning = false;
   });
   socket.on("SystemUsageStat", (arg, callback) => {
     CPUPercentage = arg["CPU"];
@@ -274,6 +282,7 @@ function KillBuild() {
     "Are you sure you want to kill this build?",
     (state) => {
       if (!state) return;
+      if (!currentlyRunning) return;
       socket.emit("KillBuild", { Project: currentProject });
       KillBtn = document.getElementById("KillBuildBtn");
       KillBtn.disabled = true;
@@ -287,6 +296,7 @@ function CleanProject() {
     "Are you sure you want to clean this project?",
     (state) => {
       if (!state) return;
+      if (!currentProject) return;
       socket.emit("CleanProject", { Project: currentProject });
       CleanBtn = document.getElementById("CleanBtn");
       CleanBtn.disabled = true;
