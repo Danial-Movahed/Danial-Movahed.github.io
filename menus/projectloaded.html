@@ -242,8 +242,7 @@
     <div class="height-100" id="OutputDisplay">
       <div class="title"><h4>Output</h4></div>
       <div id="OutputContainer">
-        <code class="Output" id="LogDisplay">
-        </code>
+        <code class="Output" id="LogDisplay"> </code>
         <div id="bottom"></div>
       </div>
     </div>
@@ -258,6 +257,7 @@
             type="text"
             name="ConsolePort"
             id="ConsolePort"
+            placeholder="Port number:"
           />
           <button
             class="button-21"
@@ -272,8 +272,20 @@
     <div class="height-100" id="SettingsDisplay">
       <div class="title"><h4>Settings</h4></div>
       <button class="button-21" id="ErrorReportingBtn">
-        Enable error reporting in telegram bot
+        Enable error reporting in bot
       </button>
+      <div class="BuildCMDContainer">
+        <label for="BuildCMD">Set build command:</label>
+        <div class="BuildCMDInput">
+          <input
+            type="text"
+            name="BuildCMD"
+            id="BuildCMD"
+            placeholder="Build command (empty for make)"
+          />
+          <button class="button-21" id="BuildApplyBtn" onclick="SetBuildCommand()">Apply</button>
+        </div>
+      </div>
     </div>
   </body>
 </html>

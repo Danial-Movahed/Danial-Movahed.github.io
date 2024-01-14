@@ -155,6 +155,15 @@ function SetupMonitors() {
   });
   SetupLogs();
   CheckRunning();
+  GetBuildCMD();
+}
+
+function GetBuildCMD() {
+  BuildCMD = document.getElementById("BuildCMD")
+  socket.emit("GetBuildCMD", {})
+  socket.on("BuildCMD", (arg, callback) => {
+    BuildCMD.value = arg["cmd"]
+  })
 }
 
 function CheckRunning() {
@@ -211,12 +220,12 @@ function ShowOutput() {
 
 function ShowConsole() {
   HideAll();
-  document.getElementById("ConsoleDisplay").style.display = "inline";
+  document.getElementById("ConsoleDisplay").style.display = "flex";
 }
 
 function ShowSettings() {
   HideAll();
-  document.getElementById("SettingsDisplay").style.display = "inline";
+  document.getElementById("SettingsDisplay").style.display = "flex";
 }
 
 function UnloadProject() {
@@ -309,4 +318,14 @@ function CleanProject() {
       });
     }
   );
+}
+
+function SetBuildCommand() {
+  BuildCMD=document.getElementById("BuildCMD");
+  BuildBtn = document.getElementById("BuildApplyBtn");
+  BuildBtn.innerHTML = "Applying";
+  socket.emit("SetBuildCMD", {"cmd": BuildCMD.value})
+  socket.on("ConfirmSetBuildCMD", (arg, callback) => {
+    Telegram.WebApp.showAlert("Successfully set build command!")
+  })
 }

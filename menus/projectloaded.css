@@ -1,48 +1,88 @@
 .Monitors {
-    display: grid;
-    grid-template-columns: auto auto auto;
+  display: grid;
+  grid-template-columns: auto auto auto;
 }
 
 .Monitor {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .StartConsoleContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+#ConsoleStartBar {
+  display: none;
+}
+
+#OutputContainer {
+  border-radius: 20px;
+  background-color: lightgray;
+  padding: 20px;
+  height: calc(100vh - 30px - 53px);
+}
+
+#LogDisplay {
+  overflow: scroll;
+  display: block;
+  overflow: scroll;
+  max-height: 100%;
+}
+
+.log {
+  color: black;
+  font-family: monospace;
+  font-size: 12px;
+  margin: 0;
+}
+
+.error {
+  color: rgb(195, 32, 32);
+}
+
+.title {
+  height: 30px;
+}
+
+input {
+  padding: 10px 20px;
+  border-radius: 100px;
+  border: 1px solid #1f1f1f3d;
+  font-size: 15px;
+  outline: none;
+  width: 100%;
+}
+input::placeholder {
+  color: #1f1f1f3d;
+}
+
+.BuildCMDContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.BuildCMDInput {
+    display: flex;
+    gap: 10px;
+}
+
+#SettingsDisplay {
+    gap: 20px;
     display: flex;
     flex-direction: column;
 }
 
-#ConsoleStartBar {
-    display: none;
+#ConsoleDisplay {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-#OutputContainer {
-    border-radius: 20px;
-    background-color: lightgray;
-    padding: 20px;
-    height: calc(100vh - 30px - 53px);
-}
-
-#LogDisplay {
-    overflow: scroll;
-    display: block;
-    overflow: scroll;
-    max-height: 100%;
-}
-
-.log {
-    color: black;
-    font-family: monospace;
-    font-size: 12px;
-    margin: 0;
-}
-
-.error {
-    color: rgb(195, 32, 32);
-}
-
-.title {
-    height: 30px;
+.ConsoleInput {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
