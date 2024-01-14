@@ -10,13 +10,13 @@ body {
 .MainContainer {
   background-color: rgb(103, 244, 244);
   border-radius: 20px;
-  padding: 40px;
+  padding: 10px;
 }
 
 input {
     padding: 10px 20px;
     box-sizing: border-box;
-    border-radius: 100px;
+    border-radius: 20px;
     border: 1px solid #1f1f1f3d;
     outline: none;
     width: 100%;
@@ -29,7 +29,7 @@ input::placeholder {
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding: 10px;
-    gap: 20px;
+    gap: 10px;
 }
 
 #CloneButton {
