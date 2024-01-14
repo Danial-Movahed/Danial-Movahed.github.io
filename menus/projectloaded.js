@@ -327,5 +327,6 @@ function SetBuildCommand() {
   socket.emit("SetBuildCMD", {"cmd": BuildCMD.value})
   socket.on("ConfirmSetBuildCMD", (arg, callback) => {
     Telegram.WebApp.showAlert("Successfully set build command!")
+    BuildBtn.innerHTML = "Apply";
   })
 }
