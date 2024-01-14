@@ -7,11 +7,11 @@ body {
 * {
   font-family: "Open Sans";
 }
-/* .MainContainer {
-  background-color: aqua;
+.MainContainer {
+  background-color: rgb(103, 244, 244);
   border-radius: 20px;
   padding: 40px;
-} */
+}
 
 input {
     padding: 10px 20px;
