@@ -4,10 +4,25 @@ body {
   justify-content: center;
 }
 
-.MainContainer {
+* {
+  font-family: "Open Sans";
+}
+/* .MainContainer {
   background-color: aqua;
   border-radius: 20px;
   padding: 40px;
+} */
+
+input {
+    padding: 10px 20px;
+    box-sizing: border-box;
+    border-radius: 100px;
+    border: 1px solid #1f1f1f3d;
+    outline: none;
+    width: 100%;
+}
+input::placeholder {
+    color: #1f1f1f3d;
 }
 
 .CloneInputContainer {
