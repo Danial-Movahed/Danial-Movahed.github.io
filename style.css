@@ -14,7 +14,25 @@ body {
     text-align: center;
 }
 
-.MainButton {
+button {
+    background-color: #3362ae;
+    color: white;
+    padding: 20px 20px;
+    border: none;
+    width: 100%;
+    display: block;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: .1s;
+    text-align: center;
+    box-sizing: border-box;
+    font-size: 20px;
+}
+button:hover {
+    background-color: #396fc5;
+}
+
+/* .MainButton {
     background-color: aqua;
     text-decoration: none;
     color: black;
@@ -22,4 +40,4 @@ body {
     border-radius: 20px;
     border: none;
     font-family: 'Poppins', sans-serif;
-}
+} */
