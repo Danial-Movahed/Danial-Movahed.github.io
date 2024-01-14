@@ -120,7 +120,7 @@ function SetupMonitors() {
     RunningStatus.innerHTML = "Not Running";
     StartBtn.innerHTML = "Start build!";
     KillBtn.innerHTML = "Kill build!";
-    StopBtn.innerHTML = "Stop build!"
+    StopBtn.innerHTML = "Stop build!";
     StartBtn.removeAttribute("disabled");
     KillBtn.removeAttribute("disabled");
     StopBtn.removeAttribute("disabled");
@@ -257,28 +257,46 @@ function StartBuild() {
 }
 
 function StopBuild() {
-  socket.emit("StopBuild", { Project: currentProject });
-  StopBtn = document.getElementById("StopBuildBtn");
-  StopBtn.disabled = true;
-  StopBtn.innerHTML = "Stopping build...";
+  Telegram.WebApp.showConfirm(
+    "Are you sure you want to stop this build?",
+    (state) => {
+      if (!state) return;
+      socket.emit("StopBuild", { Project: currentProject });
+      StopBtn = document.getElementById("StopBuildBtn");
+      StopBtn.disabled = true;
+      StopBtn.innerHTML = "Stopping build...";
+    }
+  );
 }
 
 function KillBuild() {
-  socket.emit("KillBuild", { Project: currentProject });
-  KillBtn = document.getElementById("KillBuildBtn");
-  KillBtn.disabled = true;
-  KillBtn.innerHTML = "Killing build...";
+  Telegram.WebApp.showConfirm(
+    "Are you sure you want to kill this build?",
+    (state) => {
+      if (!state) return;
+      socket.emit("KillBuild", { Project: currentProject });
+      KillBtn = document.getElementById("KillBuildBtn");
+      KillBtn.disabled = true;
+      KillBtn.innerHTML = "Killing build...";
+    }
+  );
 }
 
 function CleanProject() {
-  socket.emit("CleanProject", { Project: currentProject });
-  CleanBtn = document.getElementById("CleanBtn");
-  CleanBtn.disabled = true;
-  CleanBtn.innerHTML = "Cleaning...";
-  socket.on("CleanProjectStatus", (arg, callback) => {
-    if (arg["data"]) {
-      CleanBtn.innerHTML = "Clean Project"
-      CleanBtn.removeAttribute("disabled")
+  Telegram.WebApp.showConfirm(
+    "Are you sure you want to clean this project?",
+    (state) => {
+      if (!state) return;
+      socket.emit("CleanProject", { Project: currentProject });
+      CleanBtn = document.getElementById("CleanBtn");
+      CleanBtn.disabled = true;
+      CleanBtn.innerHTML = "Cleaning...";
+      socket.on("CleanProjectStatus", (arg, callback) => {
+        if (arg["data"]) {
+          CleanBtn.innerHTML = "Clean Project";
+          CleanBtn.removeAttribute("disabled");
+        }
+      });
     }
-  })
+  );
 }
